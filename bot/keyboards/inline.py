@@ -31,7 +31,7 @@ def get_article_keyboard(article_link: str) -> InlineKeyboardMarkup:
         inline_keyboard=[
             [
                 InlineKeyboardButton(
-                    text="Читать статью👉🏻",
+                    text="Читать статью",
                     url=article_link
                 )
             ],
