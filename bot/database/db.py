@@ -171,6 +171,33 @@ class Database:
             logger.error(f"Ошибка получения сообщений: {e}")
             return []
 
+    async def get_all_users(self) -> List[Dict[str, Any]]:
+        """Получение всех пользователей"""
+        try:
+            async with self.connection.cursor() as cursor:
+                await cursor.execute(
+                    """
+                    SELECT * FROM users
+                    ORDER BY created_at DESC
+                    """
+                )
+                rows = await cursor.fetchall()
+                return [dict(row) for row in rows]
+        except Exception as e:
+            logger.error(f"Ошибка получения пользователей: {e}")
+            return []
+
+    async def get_all_user_ids(self) -> List[int]:
+        """Получение всех user_id для рассылки"""
+        try:
+            async with self.connection.cursor() as cursor:
+                await cursor.execute("SELECT user_id FROM users")
+                rows = await cursor.fetchall()
+                return [row["user_id"] for row in rows]
+        except Exception as e:
+            logger.error(f"Ошибка получения user_ids: {e}")
+            return []
+
     # === Статистика ===
 
     async def get_stats(self) -> Dict[str, int]:
