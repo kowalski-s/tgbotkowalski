@@ -92,8 +92,7 @@ async def reply_to_user(message: Message, db: Database):
     try:
         await message.bot.send_message(
             chat_id=user_id,
-            text=f"💬 <b>Ответ от администратора:</b>\n\n{message.text}",
-            parse_mode="HTML"
+            text=message.text
         )
 
         # Сохраняем в БД

@@ -62,10 +62,4 @@ async def handle_user_message(message: Message, db: Database):
     except Exception as e:
         logger.error(f"Ошибка отправки сообщения администратору: {e}")
 
-    # Подтверждение пользователю
-    await message.answer(
-        "✅ Ваше сообщение получено!\n\n"
-        "Администратор ответит вам в ближайшее время."
-    )
-
     logger.info(f"Обработано сообщение от пользователя {user_id}")
