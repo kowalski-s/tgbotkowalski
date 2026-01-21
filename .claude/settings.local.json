@@ -1,7 +1,8 @@
 {
   "permissions": {
     "allow": [
-      "Bash(tree:*)"
+      "Bash(tree:*)",
+      "Bash(copy \"D:\\\\github\\\\tgbotkowalski\\\\data\\\\bonus.pdf\" \"D:\\\\github\\\\tgbotkowalski\\\\static\\\\bonus.pdf\")"
     ]
   }
 }

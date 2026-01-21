@@ -13,11 +13,11 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Копируем код бота
 COPY bot/ ./bot/
 
-# Создаем директорию для данных
-RUN mkdir -p /app/data
+# Копируем статические файлы (PDF)
+COPY static/ ./static/
 
-# Копируем данные (PDF файл)
-COPY data/ ./data/
+# Создаем директорию для данных (БД)
+RUN mkdir -p /app/data
 
 # Запускаем бота
 CMD ["python", "-m", "bot.main"]

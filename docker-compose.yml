@@ -8,17 +8,19 @@ services:
     env_file:
       - .env
     volumes:
-      # Сохраняем базу данных на хосте
-      - ./data:/app/data
+      # Named volume для сохранения БД между обновлениями
+      - bot_data:/app/data
     logging:
       driver: "json-file"
       options:
         max-size: "10m"
         max-file: "3"
-    # Мониторинг здоровья контейнера
     healthcheck:
       test: ["CMD-SHELL", "pgrep -f 'python -m bot.main' || exit 1"]
       interval: 30s
       timeout: 10s
       retries: 3
       start_period: 40s
+
+volumes:
+  bot_data:

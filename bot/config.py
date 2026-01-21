@@ -59,7 +59,7 @@ class Config:
             channel_id=channel_id,
             channel_link=os.getenv("CHANNEL_LINK", "https://t.me/your_channel"),
             article_link=os.getenv("ARTICLE_LINK", "https://example.com/article"),
-            pdf_file_path=os.getenv("PDF_FILE_PATH", "./data/bonus.pdf"),
+            pdf_file_path=os.getenv("PDF_FILE_PATH", "./static/bonus.pdf"),
             database_path=os.getenv("DATABASE_PATH", "./data/bot.db"),
             welcome_message=os.getenv(
                 "WELCOME_MESSAGE",
