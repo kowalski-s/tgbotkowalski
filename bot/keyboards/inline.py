@@ -5,15 +5,7 @@ from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 
 def get_subscription_keyboard(channel_link: str) -> InlineKeyboardMarkup:
-    """
-    Клавиатура с кнопками для подписки на канал
-
-    Args:
-        channel_link: Ссылка на канал
-
-    Returns:
-        InlineKeyboardMarkup: Клавиатура
-    """
+    """Клавиатура с кнопками для подписки на канал"""
     keyboard = InlineKeyboardMarkup(
         inline_keyboard=[
             [
@@ -26,6 +18,21 @@ def get_subscription_keyboard(channel_link: str) -> InlineKeyboardMarkup:
                 InlineKeyboardButton(
                     text="✅ Я подписался",
                     callback_data="check_subscription"
+                )
+            ],
+        ]
+    )
+    return keyboard
+
+
+def get_article_keyboard(article_link: str) -> InlineKeyboardMarkup:
+    """Клавиатура с кнопкой для статьи"""
+    keyboard = InlineKeyboardMarkup(
+        inline_keyboard=[
+            [
+                InlineKeyboardButton(
+                    text="Читать статью👉🏻",
+                    url=article_link
                 )
             ],
         ]
