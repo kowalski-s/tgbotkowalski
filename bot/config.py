@@ -2,8 +2,12 @@
 Конфигурация бота из переменных окружения
 """
 import os
+from pathlib import Path
 from dataclasses import dataclass
 from dotenv import load_dotenv
+
+# Базовая директория проекта (корень)
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Загружаем переменные из .env
 load_dotenv()
@@ -53,14 +57,24 @@ class Config:
         if not channel_id:
             raise ValueError("CHANNEL_ID не установлен в .env файле!")
 
+        # Преобразуем относительные пути в абсолютные
+        pdf_path = os.getenv("PDF_FILE_PATH", "static/bonus.pdf")
+        db_path = os.getenv("DATABASE_PATH", "data/bot.db")
+
+        # Если путь относительный, делаем абсолютным от корня проекта
+        if not os.path.isabs(pdf_path):
+            pdf_path = str(BASE_DIR / pdf_path)
+        if not os.path.isabs(db_path):
+            db_path = str(BASE_DIR / db_path)
+
         return cls(
             bot_token=bot_token,
             admin_id=admin_id,
             channel_id=channel_id,
             channel_link=os.getenv("CHANNEL_LINK", "https://t.me/your_channel"),
             article_link=os.getenv("ARTICLE_LINK", "https://example.com/article"),
-            pdf_file_path=os.getenv("PDF_FILE_PATH", "./static/bonus.pdf"),
-            database_path=os.getenv("DATABASE_PATH", "./data/bot.db"),
+            pdf_file_path=pdf_path,
+            database_path=db_path,
             welcome_message=os.getenv(
                 "WELCOME_MESSAGE",
                 "Привет! 👋\n\nДля получения полезной статьи подпишись на мой канал."
