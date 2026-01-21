@@ -57,9 +57,16 @@ class Config:
         if not channel_id:
             raise ValueError("CHANNEL_ID не установлен в .env файле!")
 
-        # Абсолютные пути от корня проекта
-        pdf_path = str(BASE_DIR / "static" / "bonus.pdf")
-        db_path = str(BASE_DIR / "data" / "bot.db")
+        # Пути к файлам
+        # В Docker: /app/static/... , локально: от корня проекта
+        if os.path.exists("/app/static"):
+            # Docker
+            pdf_path = "/app/static/bonus.pdf"
+            db_path = "/app/data/bot.db"
+        else:
+            # Локальный запуск
+            pdf_path = str(BASE_DIR / "static" / "bonus.pdf")
+            db_path = str(BASE_DIR / "data" / "bot.db")
 
         return cls(
             bot_token=bot_token,
