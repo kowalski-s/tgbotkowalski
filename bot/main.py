@@ -39,13 +39,20 @@ async def on_startup(bot: Bot, db: Database):
     logger.info(f"✅ Бот запущен: @{bot_info.username}")
     logger.info(f"📊 База данных: {config.database_path}")
 
+    # Проверяем PDF файл
+    import os
+    pdf_exists = os.path.exists(config.pdf_file_path)
+    logger.info(f"PDF путь: {config.pdf_file_path}")
+    logger.info(f"PDF существует: {pdf_exists}")
+
     # Уведомляем администратора о запуске
     try:
         await bot.send_message(
             chat_id=config.admin_id,
             text="🤖 <b>Бот успешно запущен!</b>\n\n"
                  f"ID бота: <code>{bot_info.id}</code>\n"
-                 f"Username: @{bot_info.username}",
+                 f"Username: @{bot_info.username}\n"
+                 f"PDF: {'✅' if pdf_exists else '❌'} {config.pdf_file_path}",
             parse_mode=ParseMode.HTML
         )
     except Exception as e:

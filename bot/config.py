@@ -92,3 +92,10 @@ class Config:
 
 # Глобальный экземпляр конфигурации
 config = Config.from_env()
+
+# Отладка путей при загрузке
+import logging
+_logger = logging.getLogger(__name__)
+_logger.info(f"BASE_DIR: {BASE_DIR}")
+_logger.info(f"PDF путь: {config.pdf_file_path}")
+_logger.info(f"PDF существует: {os.path.exists(config.pdf_file_path)}")
