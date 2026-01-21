@@ -57,15 +57,9 @@ class Config:
         if not channel_id:
             raise ValueError("CHANNEL_ID не установлен в .env файле!")
 
-        # Преобразуем относительные пути в абсолютные
-        pdf_path = os.getenv("PDF_FILE_PATH", "static/bonus.pdf")
-        db_path = os.getenv("DATABASE_PATH", "data/bot.db")
-
-        # Если путь относительный, делаем абсолютным от корня проекта
-        if not os.path.isabs(pdf_path):
-            pdf_path = str(BASE_DIR / pdf_path)
-        if not os.path.isabs(db_path):
-            db_path = str(BASE_DIR / db_path)
+        # Абсолютные пути от корня проекта
+        pdf_path = str(BASE_DIR / "static" / "bonus.pdf")
+        db_path = str(BASE_DIR / "data" / "bot.db")
 
         return cls(
             bot_token=bot_token,
